@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TypeClientService } from '../../services/type-client.service';
+import { TypeClient } from '../../../core/models/type-client.model';
 
 @Component({
   selector: 'app-type-client-list',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TypeClientListComponent implements OnInit {
 
-  constructor() { }
+	types: any[] = [];
 
-  ngOnInit(): void {
+  	constructor(
+  		 private typeClientService: TypeClientService
+  	) { }
+
+	ngOnInit(): void {
+    this.searchAllTypes();
+	}
+
+  searchAllTypes(){
+  	 this.typeClientService.getAllTypeClients()
+     .subscribe( (types: TypeClient[]) => {
+    		  this.types=types;
+      },error => {
+
+      });
   }
+
 
 }
