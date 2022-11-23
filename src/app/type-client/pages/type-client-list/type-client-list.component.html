@@ -20,9 +20,9 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-					    <tr *ngFor='let t of types'>
-					      <td>{{t.id}}</td>
-					      <td>{{t.name}}</td>
+					    <tr *ngFor='let type of types'>
+					      <td>{{type.id}}</td>
+					      <td>{{type.name}}</td>
 					    </tr>
 		                <tr *ngIf="!types.length">
 		                  <th colspan="2">No hay registros para mostrar</th>

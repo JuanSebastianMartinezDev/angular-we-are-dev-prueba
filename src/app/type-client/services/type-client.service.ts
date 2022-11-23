@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { TypeClient, TypeClientAdapter } from '../../core/models/type-client.model';
 import { ModalComponent } from '../../modal/modal.component';
 import { map } from "rxjs/operators";
@@ -8,19 +8,23 @@ import { map } from "rxjs/operators";
 @Injectable({ providedIn: 'root' })
 export class TypeClientService {
 
-   url: string = "https://localhost:7149/";
+   url = "http://localhost:5000/api/type-client";
+
+  headers: HttpHeaders = new HttpHeaders();
 
   constructor(
     private http: HttpClient,
     private adapter: TypeClientAdapter
-    ) { }
+    ) { 
+    this.headers.set('Content-Type','application/json');
+    this.headers.set('Accept', 'application/json');
+  }
 
   getAllTypeClients(): Observable<TypeClient[]> {
-    this.http.get(this.url+'type-client').pipe(
+    return this.http.get(this.url).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
-        console.log(data);
-        return data.items.slice(0,10).map((item: any) => this.adapter.adapt(item)) 
+        return data.slice(0,10).map((item: any) => this.adapter.adapt(item)) 
       })
     );  
 
@@ -28,7 +32,7 @@ export class TypeClientService {
   }
 
   getTypeClientById(id: number): Observable<TypeClient> {
-    return this.http.get(this.url+'type-client/'+id).pipe(
+    return this.http.get(this.url).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
         console.log(data);

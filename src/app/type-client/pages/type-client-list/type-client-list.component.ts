@@ -15,16 +15,18 @@ export class TypeClientListComponent implements OnInit {
   		 private typeClientService: TypeClientService
   	) { }
 
-	ngOnInit(): void {
+	ngOnInit(){
     this.searchAllTypes();
 	}
 
   searchAllTypes(){
   	 this.typeClientService.getAllTypeClients()
      .subscribe( (types: TypeClient[]) => {
+          console.log("This types");
+          console.log(types);
     		  this.types=types;
       },error => {
-
+          console.log("Errror ");
       });
   }
 
