@@ -1,1 +1,49 @@
-<p>type-client-edit works!</p>
+<div class="container">
+	<app-breadcrum secondSection="Tipo de cliente" threeSection="Edición" url="type-client"></app-breadcrum>	
+	<h2 class="mb-3 mt-2 d-flex justify-content-between align-items-center">Editar tipo de cliente
+		<a class="btn btn-primary btn-sm float-right" routerLink="/type-client"><i class="fa fa-mail-reply"></i> < Atras</a>
+	</h2> 
+
+	<div class="row align-center">
+
+		<div class="col-md-6 col-xl-8 col-sm-12">
+			<div class="card ">
+				<div class="card-body ">
+					<div class="col-10">
+						<h2 class="text-muted">Ingresa los datos basicos</h2>
+						<form [formGroup]="typeClientForm"  (ngSubmit)="onSubmit()">
+							<input type="hidden" name="id" formControlName="id" [ngModel]="type.id">
+							<div class="col-12 ">
+								<div class="form-group mb-4">
+									<label for="name">Nombre <span class="text-danger">(*)</span></label>
+									<div class="input-group">
+										<input type="text" placeholder="Introduce el nombre" class="form-control" value="" formControlName="name" [ngModel]="type.name" required>
+									</div>
+									<div *ngIf="f['state'].touched && f['name'].invalid" class="help-block with-errors text-danger" >
+										<strong>Este campo es obligatorio</strong>
+									</div>
+								</div>
+								<div class="form-group mb-4">
+									<label for="name">Estado <span class="text-danger">(*)</span></label>
+									<select class="form-control"  [ngModel]="type.state" formControlName="state" required>
+										<option value="">Seleccione el Estado</option>
+										<option value="1" >Activo</option>
+										<option value="0" >Inactivo</option>
+									</select>
+									<div *ngIf="f['state'].touched && f['state'].invalid" class="help-block with-errors text-danger">
+										<strong>Este campo es obligatorio</strong>
+									</div>
+								</div>
+								<div class="col-12">
+									<button type="submit" [disabled]="!typeClientForm.valid" class="btn btn-success">Editar</button>
+								</div>
+							</div>
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

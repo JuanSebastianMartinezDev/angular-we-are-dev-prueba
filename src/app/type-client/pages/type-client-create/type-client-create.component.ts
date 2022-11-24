@@ -4,7 +4,8 @@ import { TypeClientService } from '../../services/type-client.service';
 import { TypeClient } from '../../../core/models/type-client.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../../modal/modal.component';
-
+import { ActivatedRoute, Router } from '@angular/router';
+		
 @Component({
 	selector: 'app-type-client-create',
 	templateUrl: './type-client-create.component.html',
@@ -18,6 +19,7 @@ export class TypeClientCreateComponent implements OnInit {
 	});
 
 	constructor(
+		 private router: Router,
 		 private typeClientService: TypeClientService,
      	 public dialog: MatDialog
 		) { }
@@ -44,6 +46,11 @@ export class TypeClientCreateComponent implements OnInit {
 	                message: "El registro se guardo satisfactoriamente"
 	              }
 	            });
+
+
+	            
+	            dialogRef.afterClosed().subscribe(() => this.router.navigate(['/type-client']));
+
 	          }
 	      },error => {
 	          console.log("Errror ");

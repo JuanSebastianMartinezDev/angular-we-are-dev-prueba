@@ -11,7 +11,7 @@ import { ModalComponent } from '../../../modal/modal.component';
 })
 export class TypeClientListComponent implements OnInit {
 
-  types: any[] = [];
+  types: TypeClient[] = [];
   titleModal: String = "";
 	messageModal: String = "";
 

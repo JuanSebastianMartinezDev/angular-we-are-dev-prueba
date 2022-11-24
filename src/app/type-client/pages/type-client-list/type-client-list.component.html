@@ -1,5 +1,6 @@
 <div class="container">
-	<h2 class="mb-3 mt-5 d-flex justify-content-between align-items-center">Modulo - tipos de cliente
+	<app-breadcrum secondSection="Tipo de cliente" threeSection="Listado" url="type-client"></app-breadcrum>
+	<h2 class="mb-3 mt-2 d-flex justify-content-between align-items-center">Modulo - tipos de cliente
 		<div class="float-right1">
 			<a class="btn btn-primary btn-sm " routerLink="/"><i class="fa fa-mail-reply"></i> < Atras</a>&nbsp;
 			<a class="btn btn-success btn-sm " routerLink="/type-client/create"><i class="fa fa-mail-reply"></i> + Nuevo</a>
@@ -20,9 +21,9 @@
 								<tr>
 									<th>ID</th>
 									<th>NOMBRE</th>
-									<th>ESTADO</th>
 									<th>FECHA CREACIÓN</th>
 									<th>FECHA ACTUALIZADO</th>
+									<th>ESTADO</th>
 									<th>ACCIONES</th>
 								</tr>
 							</thead>
@@ -30,8 +31,8 @@
 								<tr *ngFor='let type of types'>
 									<td>{{type.id}}</td>
 									<td>{{type.name}}</td>
-									<td>{{type.createdAt}}</td>
-									<td>{{type.updatedAt}}</td>
+									<td>{{type.createdAt | date: "yyyy-M-dd HH:mm:ss a"}}</td>
+									<td>{{type.updatedAt | date: "yyyy-M-dd HH:mm:ss a"}}</td>
 									<td>
 										<button mat-button *ngIf="type.state==1" color="primary">Activo</button>
 										<button mat-button *ngIf="type.state==0" matBadgePosition="before" matBadgeColor="accent" color="warn">Inactivo</button>
@@ -59,8 +60,8 @@
 										</mat-menu>
 									</td>
 								</tr>
-								<tr *ngIf="!types.length">
-									<th colspan="2">No hay registros para mostrar</th>
+								<tr *ngIf="!types.length" >
+									<th colspan="6">No hay registros para mostrar</th>
 								</tr>					    
 							</tbody>
 						</table>

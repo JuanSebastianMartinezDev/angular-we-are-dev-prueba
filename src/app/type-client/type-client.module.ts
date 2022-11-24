@@ -5,6 +5,7 @@ import { TypeClientListComponent } from './pages/type-client-list/type-client-li
 import { TypeClientCreateComponent } from './pages/type-client-create/type-client-create.component';
 import { TypeClientEditComponent } from './pages/type-client-edit/type-client-edit.component';
 import { ModalComponent } from '../modal/modal.component';
+import { BreadcrumComponent } from '../breadcrum/breadcrum.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -32,7 +33,8 @@ const modules = [
     TypeClientListComponent,
     TypeClientCreateComponent,
     TypeClientEditComponent,
-    ModalComponent
+    ModalComponent,
+    BreadcrumComponent
   ],
   imports: [
     modules
