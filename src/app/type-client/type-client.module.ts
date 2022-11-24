@@ -12,6 +12,20 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+
+const modules = [
+    CommonModule,
+    TypeClientRoutingModule,
+    MatIconModule,
+    MatMenuModule,
+    MatBadgeModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule
+];
 
 @NgModule({
   declarations: [
@@ -21,13 +35,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     ModalComponent
   ],
   imports: [
-    CommonModule,
-    TypeClientRoutingModule,
-    MatIconModule,
-    MatMenuModule,
-    MatBadgeModule,
-    ReactiveFormsModule,
-    MatButtonModule
+    modules
   ],
   providers: [],
   bootstrap: [TypeClientListComponent]

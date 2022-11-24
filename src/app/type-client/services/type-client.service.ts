@@ -65,7 +65,7 @@ export class TypeClientService {
     return of();
   }
 
-  saveTypeClient(type : TypeClient): Observable<boolean> {
+  saveTypeClient(type : TypeClientAdapter): Observable<boolean> {
     return this.http.post(this.url,type).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
