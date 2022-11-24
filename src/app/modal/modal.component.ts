@@ -13,7 +13,7 @@ export interface DialogData {
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
-export class ModalComponent {
+export class ModalComponent implements OnInit  {
 
   	constructor(
         public dialogRef: MatDialogRef<ModalComponent>,

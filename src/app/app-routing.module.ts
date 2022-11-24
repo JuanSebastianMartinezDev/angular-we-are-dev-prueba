@@ -5,7 +5,11 @@ const routes: Routes = [
 	{
 		path: "type-client",
 		loadChildren: () => import("./type-client/type-client.module").then(m => m.TypeClientModule),
-	}
+	},
+	{
+		path: "sector",
+		loadChildren: () => import("./sector/sector.module").then(m => m.SectorModule),
+	}	
 ];
 
 @NgModule({

@@ -1,13 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { ModalModule } from './modal/modal.module';  
-import { BreadcrumModule } from './breadcrum/breadcrum.module';  
+import { RouterModule } from '@angular/router';
 // Material Angular
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -17,18 +12,17 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
+import { ModalComponent } from './modal.component';  
 
 @NgModule({
   declarations: [
-    AppComponent
+    ModalComponent
   ],
   imports: [
     CommonModule,
-    BrowserModule,
-    AppRoutingModule,
+    RouterModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule,
     ReactiveFormsModule,
     MatNativeDateModule,
     MatSidenavModule,
@@ -37,11 +31,10 @@ import { MatIconModule } from '@angular/material/icon';
     MatListModule,
     MatDialogModule,
     MatMenuModule,
-    MatIconModule,
-    ModalModule,
-    BreadcrumModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    MatIconModule
+  ],  
+  exports: [
+    ModalComponent
+  ]
 })
-export class AppModule { }
+export class ModalModule { }

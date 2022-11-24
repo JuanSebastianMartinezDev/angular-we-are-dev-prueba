@@ -1,9 +1,9 @@
 <div class="container">
-	<app-breadcrum secondSection="Tipos de cliente" threeSection="Listado" url="type-client"></app-breadcrum>
-	<h2 class="mb-3 mt-2 d-flex justify-content-between align-items-center">Modulo - tipos de cliente
+	<app-breadcrum secondSection="Sectores" threeSection="Listado" url="sector"></app-breadcrum>
+	<h2 class="mb-3 mt-2 d-flex justify-content-between align-items-center">Modulo - sectores
 		<div class="float-right1">
 			<a class="btn btn-primary btn-sm " routerLink="/"><i class="fa fa-mail-reply"></i> < Atras</a>&nbsp;
-			<a class="btn btn-success btn-sm " routerLink="/type-client/create"><i class="fa fa-mail-reply"></i> + Nuevo</a>
+			<a class="btn btn-success btn-sm " routerLink="/sector/create"><i class="fa fa-mail-reply"></i> + Nuevo</a>
 		</div>
 	</h2> 
 
@@ -12,7 +12,7 @@
 		<div class="col-md-12 ">
 			<div class="card ">
 				<div class="card-header text-white bg-primary " >
-					<h5 class="card-title mb-0">Listado de tipos de cliente</h5>
+					<h5 class="card-title mb-0">Listado de sectores</h5>
 				</div>
 				<div class="card-body text-center">
 					<div class="col-12 table-responsive-lg">
@@ -28,14 +28,14 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor='let type of types'>
-									<td>{{type.id}}</td>
-									<td>{{type.name}}</td>
-									<td>{{type.createdAt | date: "yyyy-M-dd HH:mm:ss a"}}</td>
-									<td>{{type.updatedAt | date: "yyyy-M-dd HH:mm:ss a"}}</td>
+								<tr *ngFor='let sector of sectors'>
+									<td>{{sector.id}}</td>
+									<td>{{sector.name}}</td>
+									<td>{{sector.createdAt | date: "yyyy-M-dd HH:mm:ss a"}}</td>
+									<td>{{sector.updatedAt | date: "yyyy-M-dd HH:mm:ss a"}}</td>
 									<td>
-										<button mat-button *ngIf="type.state==1" color="primary">Activo</button>
-										<button mat-button *ngIf="type.state==0" matBadgePosition="before" matBadgeColor="accent" color="warn">Inactivo</button>
+										<button mat-button *ngIf="sector.state==1" color="primary">Activo</button>
+										<button mat-button *ngIf="sector.state==0" matBadgePosition="before" matBadgeColor="accent" color="warn">Inactivo</button>
 									</td>
 									<td>
 
@@ -43,24 +43,24 @@
 											<mat-icon>more_vert</mat-icon>
 										</button>
 										<mat-menu #menu="matMenu">
-											<a routerLink="/type-client/{{type.id}}/edit">
+											<a routerLink="/sector/{{sector.id}}/edit">
 												<button mat-menu-item >
 													<mat-icon>edit</mat-icon>
 													<span>Editar</span>
 												</button>
 											</a>
-											<button mat-menu-item *ngIf="type.state==1" (click)="inactiveTypeClient(type)">
+											<button mat-menu-item *ngIf="sector.state==1" (click)="inactiveSector(sector)">
 												<mat-icon>delete</mat-icon>
 												<span>Inactivar</span>
 											</button>
-											<button mat-menu-item *ngIf="type.state==0" (click)="restoreTypeClient(type)">
+											<button mat-menu-item *ngIf="sector.state==0" (click)="restoreSector(sector)">
 												<mat-icon>check_circle_outline</mat-icon>
 												<span>Activar</span>
 											</button>
 										</mat-menu>
 									</td>
 								</tr>
-								<tr *ngIf="!types.length" >
+								<tr *ngIf="!sectors.length" >
 									<th colspan="6">No hay registros para mostrar</th>
 								</tr>					    
 							</tbody>

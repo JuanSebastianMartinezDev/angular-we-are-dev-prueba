@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { TypeClientRoutingModule } from './type-client-routing.module';
-import { TypeClientListComponent } from './pages/type-client-list/type-client-list.component';
-import { TypeClientCreateComponent } from './pages/type-client-create/type-client-create.component';
-import { TypeClientEditComponent } from './pages/type-client-edit/type-client-edit.component';
+import { SectorRoutingModule } from './sector-routing.module';
+
+import { SectorListComponent } from './pages/sector-list/sector-list.component';
+import { SectorCreateComponent } from './pages/sector-create/sector-create.component';
+import { SectorEditComponent } from './pages/sector-edit/sector-edit.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -14,10 +15,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { ModalModule } from '../modal/modal.module';  
 import { BreadcrumModule } from '../breadcrum/breadcrum.module';  
+ 
 
 const modules = [
     CommonModule,
-    TypeClientRoutingModule,
+    SectorRoutingModule,
     MatIconModule,
     MatMenuModule,
     MatBadgeModule,
@@ -26,19 +28,19 @@ const modules = [
     MatFormFieldModule,
     MatSelectModule,
     ModalModule,
-    BreadcrumModule    
+    BreadcrumModule
 ];
 
 @NgModule({
   declarations: [
-    TypeClientListComponent,
-    TypeClientCreateComponent,
-    TypeClientEditComponent
+    SectorListComponent,
+    SectorCreateComponent,
+    SectorEditComponent
   ],
   imports: [
     modules
   ],
   providers: [],
-  bootstrap: [TypeClientListComponent]
+  bootstrap: [SectorListComponent]
 })
-export class TypeClientModule { }
+export class SectorModule { }
