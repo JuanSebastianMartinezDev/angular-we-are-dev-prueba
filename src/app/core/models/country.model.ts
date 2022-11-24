@@ -5,12 +5,12 @@ export class Country {
   constructor(
     public id: number,
     public name: string,
+    public code: string,
     public state: number,
     public createdAt: string,
     public updatedAt: string,
   ){}
 }
-
 
 @Injectable({
   providedIn: "root",
@@ -20,6 +20,7 @@ export class CountryAdapter implements Adapter<Country> {
     return new Country(
         item.id,
         item.name,
+        item.code,
         item.state,
         item.createdAt,
         item.updatedAt

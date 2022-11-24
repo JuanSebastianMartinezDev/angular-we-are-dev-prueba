@@ -1,26 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Sector, SectorAdapter } from '../../core/models/sector.model';
+import { Country, CountryAdapter } from '../../core/models/country.model';
 import { ModalComponent } from '../../modal/modal.component';
 import { map } from "rxjs/operators";
 
 @Injectable({ providedIn: 'root' })
-export class SectorService {
+export class CountryService {
 
-  url = "http://localhost:5000/api/sector";
+  url = "http://localhost:5000/api/country";
 
   headers: HttpHeaders = new HttpHeaders();
 
   constructor(
     private http: HttpClient,
-    private adapter: SectorAdapter
+    private adapter: CountryAdapter
     ) { 
     this.headers.set('Content-Type','application/json');
     this.headers.set('Accept', 'application/json');
   }
 
-  getAllSectors(): Observable<Sector[]> {
+  getAllCountrys(): Observable<Country[]> {
     return this.http.get(this.url,{headers: this.headers }).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
@@ -31,11 +31,10 @@ export class SectorService {
     return of([]);
   }
 
-  getSectorById(id : number): Observable<Sector> {
+  getCountryById(id : number): Observable<Country> {
     return this.http.get(this.url+'/'+id).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
-        console.log(data);
         return this.adapter.adapt(data);
       })
     );
@@ -43,8 +42,8 @@ export class SectorService {
     return of();
   }
 
-  updateSector(sector : Sector): Observable<boolean> {
-    return this.http.put(this.url+'/'+sector.id,sector).pipe(
+  updateCountry(country : Country): Observable<boolean> {
+    return this.http.put(this.url+'/'+country.id,country).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
         return data;
@@ -54,7 +53,7 @@ export class SectorService {
     return of();
   }
 
-  deleteSectorById(id : number): Observable<boolean> {
+  deleteCountryById(id : number): Observable<boolean> {
     return this.http.delete(this.url+'/'+id).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
@@ -65,7 +64,7 @@ export class SectorService {
     return of();
   }
 
-  restoreSectorById(id : number): Observable<boolean> {
+  restoreCountryById(id : number): Observable<boolean> {
     return this.http.post(this.url+'/restore/'+id,{}).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
@@ -76,11 +75,10 @@ export class SectorService {
     return of();
   }
 
-  saveSector(sector : Sector): Observable<boolean> {
-    return this.http.post(this.url,sector).pipe(
+  saveCountry(country : Country): Observable<boolean> {
+    return this.http.post(this.url,country).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
-        console.log(data);
         return data;
       })
     );

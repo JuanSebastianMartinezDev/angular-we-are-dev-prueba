@@ -1,0 +1,58 @@
+<div class="container">
+	<app-breadcrum secondSection="Paises" threeSection="Edición" url="country"></app-breadcrum>	
+	<h2 class="mb-3 mt-2 d-flex justify-content-between align-items-center">Editar Pais
+		<a class="btn btn-primary btn-sm float-right" routerLink="/country"><i class="fa fa-mail-reply"></i> < Atras</a>
+	</h2> 
+
+	<div class="row align-center">
+
+		<div class="col-md-6 col-xl-8 col-sm-12">
+			<div class="card ">
+				<div class="card-body ">
+					<div class="col-10">
+						<h2 class="text-muted">Ingresa los datos basicos</h2>
+						<form [formGroup]="countryForm"  (ngSubmit)="onSubmit()">
+							<input type="hidden" name="id" formControlName="id" [ngModel]="country.id">
+							<div class="col-12 ">
+								<div class="form-group mb-4">
+									<label for="name">Nombre <span class="text-danger">(*)</span></label>
+									<div class="input-group">
+										<input type="text" placeholder="Introduce el nombre" class="form-control" value="" formControlName="name" [ngModel]="country.name" required>
+									</div>
+									<div *ngIf="f['name'].touched && f['name'].invalid" class="help-block with-errors text-danger" >
+										<strong>Este campo es obligatorio</strong>
+									</div>
+								</div>
+								<div class="form-group mb-4">
+									<label for="code">Código <span class="text-danger">(*)</span></label>
+									<div class="input-group">
+										<input type="text" placeholder="Introduce el nombre" class="form-control" value="" formControlName="code" [ngModel]="country.code" required>
+									</div>
+									<div *ngIf="f['code'].touched && f['code'].invalid" class="help-block with-errors text-danger" >
+										<strong>Este campo es obligatorio</strong>
+									</div>
+								</div>								
+								<div class="form-group mb-4">
+									<label for="state">Estado <span class="text-danger">(*)</span></label>
+									<select class="form-control"  [ngModel]="country.state" formControlName="state" required>
+										<option value="">Seleccione el Estado</option>
+										<option value="1" >Activo</option>
+										<option value="0" >Inactivo</option>
+									</select>
+									<div *ngIf="f['state'].touched && f['state'].invalid" class="help-block with-errors text-danger">
+										<strong>Este campo es obligatorio</strong>
+									</div>
+								</div>
+								<div class="col-12">
+									<button type="submit" [disabled]="!countryForm.valid" class="btn btn-success">Editar</button>
+								</div>
+							</div>
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
