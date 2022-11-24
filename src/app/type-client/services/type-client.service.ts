@@ -21,7 +21,7 @@ export class TypeClientService {
   }
 
   getAllTypeClients(): Observable<TypeClient[]> {
-    return this.http.get(this.url).pipe(
+    return this.http.get(this.url,{headers: this.headers }).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
         return data.slice(0,10).map((item: any) => this.adapter.adapt(item)) 
@@ -31,8 +31,8 @@ export class TypeClientService {
     return of([]);
   }
 
-  getTypeClientById(id: number): Observable<TypeClient> {
-    return this.http.get(this.url).pipe(
+  getTypeClientById(id : number): Observable<TypeClient> {
+    return this.http.get(this.url+'/'+id).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
         console.log(data);
@@ -43,5 +43,37 @@ export class TypeClientService {
     return of();
   }
 
+  deleteTypeClientById(id : number): Observable<boolean> {
+    return this.http.delete(this.url+'/'+id).pipe(
+      // Adapt with each cycle
+      map((data: any) =>  {
+        return data;
+      })
+    );
 
+    return of();
+  }
+
+  restoreTypeClientById(id : number): Observable<boolean> {
+    return this.http.post(this.url+'/restore/'+id,{}).pipe(
+      // Adapt with each cycle
+      map((data: any) =>  {
+        return data;
+      })
+    );
+
+    return of();
+  }
+
+  saveTypeClient(type : TypeClient): Observable<boolean> {
+    return this.http.post(this.url,type).pipe(
+      // Adapt with each cycle
+      map((data: any) =>  {
+        console.log(data);
+        return data;
+      })
+    );
+
+    return of();
+  }
 }

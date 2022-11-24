@@ -1,40 +1,40 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>{{title}}</span>
+	<button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+		<mat-icon>menu</mat-icon>
+	</button>
+	<span>{{title}}</span>
 </mat-toolbar>
 <mat-drawer-container class="example-container col-12" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Menu</p>
-    
-	<mat-list>
-	 <mat-list-item>	    
-	 	<button mat-flat-button >
-	      <a routerLink="/"> Home</a>
-	    </button>
-	</mat-list-item>
-	 <mat-list-item>
-	 	<button mat-flat-button >
-	      <a routerLink="type-client"> Tipos de cliente</a>
-	    </button>
-	 </mat-list-item>
-	 <mat-list-item>
-	 	<button mat-flat-button >
-	      <a routerLink="/"> Clientes</a>
-	    </button>
-	 </mat-list-item>
-	 <mat-list-item>
-	 	<button mat-flat-button >
-	      <a routerLink="/"> Sectores</a>
-	    </button>
-	 </mat-list-item>	 
-	</mat-list>
-  </mat-drawer>
+	<mat-drawer #drawer class="example-sidenav" mode="side">
+		<p>Menu</p>
 
-  <div class="col-12">
-  	<router-outlet></router-outlet>
-  </div>
+		<mat-list>
+			<mat-list-item>	    
+				<button mat-flat-button >
+					<a routerLink="/"> Home</a>
+				</button>
+			</mat-list-item>
+			<mat-list-item>
+				<button mat-flat-button >
+					<a routerLink="type-client"> Tipos de cliente</a>
+				</button>
+			</mat-list-item>
+			<mat-list-item>
+				<button mat-flat-button >
+					<a routerLink="/"> Clientes</a>
+				</button>
+			</mat-list-item>
+			<mat-list-item>
+				<button mat-flat-button >
+					<a routerLink="/"> Sectores</a>
+				</button>
+			</mat-list-item>	 
+		</mat-list>
+	</mat-drawer>
+
+	<div class="col-12">
+		<router-outlet></router-outlet>
+	</div>
 
 </mat-drawer-container>
 

@@ -5,6 +5,9 @@ export class TypeClient {
   constructor(
     public id: number,
     public name: string,
+    public state: number,
+    public createdAt: string,
+    public updatedAt: string,
   ){}
 }
 
@@ -16,7 +19,10 @@ export class TypeClientAdapter implements Adapter<TypeClient> {
   adapt(item: any): TypeClient {
     return new TypeClient(
         item.id,
-        item.name
+        item.name,
+        item.state,
+        item.createdAt,
+        item.updatedAt
     );
   }
 }

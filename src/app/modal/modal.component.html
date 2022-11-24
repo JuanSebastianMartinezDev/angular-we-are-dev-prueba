@@ -1,7 +1,12 @@
-<h2 mat-dialog-title>{{(title) ? title : 'Ups, Ocurrio un error'}}</h2>
-<mat-dialog-content class="mat-typography">
-  <strong><p>{{message}}</p></strong>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Cerrar</button>
-</mat-dialog-actions>
+<h1 mat-dialog-title>  <strong>{{(data.title) ? data.title : 'Ups, Ocurrio un error'}}</strong></h1>
+<div mat-dialog-content>
+<p>{{data.message}}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close cdkFocusInitial (click)="closeModal()">Ok</button>
+</div>
+
+
+
+
+

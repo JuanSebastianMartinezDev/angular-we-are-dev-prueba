@@ -1,37 +1,69 @@
 <div class="container">
-<h3 class="mb-3 mt-5 d-flex justify-content-between align-items-center">Tipos de cliente
-	<a class="btn btn-primary float-right" routerLink="/"><i class="fa fa-mail-reply"></i> Regresar</a>
-</h3> 
+	<h3 class="mb-3 mt-5 d-flex justify-content-between align-items-center">Modulo - tipos de cliente
+		<a class="btn btn-primary float-right" routerLink="/"><i class="fa fa-mail-reply"></i> Regresar</a>
+	</h3> 
 
-<div class="row align-center">
+	<div class="row align-center">
 
-    <div class="col-md-12 ">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Listado de tipos</h5>
-            </div>
-            <div class="card-body text-center">
-				<div class="col-12 table-responsive-lg">
-					<table class="table table-striped table-hover">
-					  <thead>              
-					    <tr>
-					      <th>ID</th>
-					      <th>NOMBRE</th>
-					    </tr>
-					  </thead>
-					  <tbody>
-					    <tr *ngFor='let type of types'>
-					      <td>{{type.id}}</td>
-					      <td>{{type.name}}</td>
-					    </tr>
-		                <tr *ngIf="!types.length">
-		                  <th colspan="2">No hay registros para mostrar</th>
-		                </tr>					    
-					  </tbody>
-					</table>
+		<div class="col-md-12 ">
+			<div class="card ">
+				<div class="card-header text-white bg-primary " >
+					<h5 class="card-title mb-0">Listado de tipos</h5>
 				</div>
-        	</div>
-        </div>
-    </div>
+				<div class="card-body text-center">
+					<div class="col-12 table-responsive-lg">
+						<table class="table table-striped table-hover">
+							<thead>              
+								<tr>
+									<th>ID</th>
+									<th>NOMBRE</th>
+									<th>ESTADO</th>
+									<th>FECHA CREACIÓN</th>
+									<th>FECHA ACTUALIZADO</th>
+									<th>ACCIONES</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor='let type of types'>
+									<td>{{type.id}}</td>
+									<td>{{type.name}}</td>
+									<td>{{type.createdAt}}</td>
+									<td>{{type.updatedAt}}</td>
+									<td>
+										<button mat-button *ngIf="type.state==1" color="primary">Activo</button>
+										<button mat-button *ngIf="type.state==0" matBadgePosition="before" matBadgeColor="accent" color="warn">Inactivo</button>
+									</td>
+									<td>
 
-  </div>
+										<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+											<mat-icon>more_vert</mat-icon>
+										</button>
+										<mat-menu #menu="matMenu">
+											<a routerLink="/type-client/{{type.id}}/edit">
+												<button mat-menu-item >
+													<mat-icon>edit</mat-icon>
+													<span>Editar</span>
+												</button>
+											</a>
+											<button mat-menu-item *ngIf="type.state==1" (click)="inactiveTypeClient(type)">
+												<mat-icon>delete</mat-icon>
+												<span>Inactivar</span>
+											</button>
+											<button mat-menu-item *ngIf="type.state==0" (click)="restoreTypeClient(type)">
+												<mat-icon>check_circle_outline</mat-icon>
+												<span>Activar</span>
+											</button>
+										</mat-menu>
+									</td>
+								</tr>
+								<tr *ngIf="!types.length">
+									<th colspan="2">No hay registros para mostrar</th>
+								</tr>					    
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

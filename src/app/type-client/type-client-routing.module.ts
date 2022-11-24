@@ -8,7 +8,7 @@ import { TypeClientEditComponent } from './pages/type-client-edit/type-client-ed
 const routes: Routes = [
 	{ path:"", component: TypeClientListComponent },
 	{ path:"create", component: TypeClientCreateComponent },
-	{ path:"{id}/edit", component: TypeClientEditComponent }
+	{ path:":id/edit", component: TypeClientEditComponent }
 ];
 
 @NgModule({
