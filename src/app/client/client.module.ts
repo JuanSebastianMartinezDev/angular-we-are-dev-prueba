@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CountryRoutingModule } from './country-routing.module';
+import { ClientRoutingModule } from './client-routing.module';
 
-import { CountryListComponent } from './pages/country-list/country-list.component';
-import { CountryCreateComponent } from './pages/country-create/country-create.component';
-import { CountryEditComponent } from './pages/country-edit/country-edit.component';
+import { ClientListComponent } from './pages/client-list/client-list.component';
+import { ClientCreateComponent } from './pages/client-create/client-create.component';
+import { ClientEditComponent } from './pages/client-edit/client-edit.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -15,15 +15,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { ModalModule } from '../modal/modal.module';  
 import { BreadcrumModule } from '../breadcrum/breadcrum.module';  
+import { TagsComponent } from './components/tags/tags.component';
  
 
 const modules = [
     CommonModule,
-    CountryRoutingModule,
+    ClientRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatIconModule,
     MatMenuModule,
     MatBadgeModule,
-    ReactiveFormsModule,
     MatButtonModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -33,14 +35,15 @@ const modules = [
 
 @NgModule({
   declarations: [
-    CountryListComponent,
-    CountryCreateComponent,
-    CountryEditComponent
+    ClientListComponent,
+    ClientCreateComponent,
+    ClientEditComponent,
+    TagsComponent
   ],
   imports: [
     modules
   ],
   providers: [],
-  bootstrap: [CountryListComponent]
+  bootstrap: [ClientListComponent]
 })
-export class CountryModule { }
+export class ClientModule { }

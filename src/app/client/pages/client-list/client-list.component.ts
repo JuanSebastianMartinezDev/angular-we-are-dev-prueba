@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { CountryService } from '../../services/country.service';
-import { Country } from '../../../core/models/country.model';
+import { ClientService } from '../../services/client.service';
+import { Client } from '../../../core/models/client.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../../modal/modal.component';
 
 @Component({
-  selector: 'app-country-list',
-  templateUrl: './country-list.component.html',
-  styleUrls: ['./country-list.component.css']
+  selector: 'app-client-list',
+  templateUrl: './client-list.component.html',
+  styleUrls: ['./client-list.component.css']
 })
-export class CountryListComponent implements OnInit {
+export class ClientListComponent implements OnInit {
 
-  countrys: Country[] = [];
+  clients: Client[] = [];
   titleModal: String = "";
 	messageModal: String = "";
 
 	constructor(
-		 private countryService: CountryService,
+		 private clientService: ClientService,
      public dialog: MatDialog
 	) { }
 
@@ -25,22 +25,22 @@ export class CountryListComponent implements OnInit {
 	}
 
   searchAllTypes(){
-  	 this.countryService.getAllCountrys()
-     .subscribe( (countrys: Country[]) => {
-    		  this.countrys=countrys;
+  	 this.clientService.getAllClients()
+     .subscribe( (clients: Client[]) => {
+    		  this.clients=clients;
       },error => {
           console.log("Errror ");
       });
   }
 
-  inactiveCountry(country : Country){
-     this.countryService.deleteCountryById(country.id)
+  inactiveClient(client : Client){
+     this.clientService.deleteClientById(client.id)
      .subscribe( (response: boolean) => {
           if(response){
-            country.state=0;
+            client.state=0;
             const dialogRef = this.dialog.open(ModalComponent,{width: '400px',
               data: {
-                title: "El pais se actualizo correctamente",
+                title: "El cliente se actualizo correctamente",
                 message: "El estado del registro cambio a 'Inactivo'"
               }
             });
@@ -50,14 +50,14 @@ export class CountryListComponent implements OnInit {
       });
   }
 
-  restoreCountry(country: Country){
-     this.countryService.restoreCountryById(country.id)
+  restoreClient(client: Client){
+     this.clientService.restoreClientById(client.id)
      .subscribe( (response: boolean) => {
           if(response){
-            country.state=1;
+            client.state=1;
             const dialogRef = this.dialog.open(ModalComponent,{width: '400px',
               data: {
-                title: "El pais se restauro correctamente",
+                title: "El cliente se restauro correctamente",
                 message: "El estado del registro cambio a 'Activo'"
               }
             });

@@ -1,0 +1,28 @@
+<div class="card mb-2">
+	<div class="card-body">
+		<div class="form-group mb-4">
+			<label for="name">Ingresa tags <span class="text-danger">(*)</span></label>
+			<div class="input-group">
+				<input type="text" placeholder="Introduce el nombre del tag" class="form-control"  [formControl]="name" required>
+				<button type="button" class="btn btn-danger" (click)="add()">+ Agregar</button>
+			</div>
+			<div *ngIf="!name && showMessage" class="help-block with-errors text-danger">
+				<strong>Por favor ingrese un nombre</strong>
+			</div>
+		</div>
+		<hr>
+        <div class="col-12">
+            <h4>Tags guardadas</h4>
+            <div class="nota" *ngFor='let item of tags; let i = index' >
+                <p><strong><em>{{item.createdAt}}</em></strong></p>
+                <p>{{item.name}}</p>
+                <p><a class="text-danger" (click)="remove(i)">Eliminar nota</a></p>
+                <hr>
+            </div>
+            <div class="help-block with-errors text-danger" *ngIf="tags.length==0" >
+                <strong>No hay tags registradas</strong>
+            </div>
+        </div>
+
+	</div>
+</div>

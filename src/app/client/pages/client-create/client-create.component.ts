@@ -1,61 +1,90 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,Validators } from '@angular/forms';
-import { CountryService } from '../../services/country.service';
-import { Country } from '../../../core/models/country.model';
+import { ClientService } from '../../services/client.service';
+import { Client, ClientAdapter } from '../../../core/models/client.model';
+import { ClientTag } from '../../../core/models/client-tag.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../../modal/modal.component';
 import { ActivatedRoute, Router } from '@angular/router';
-		
-@Component({
-	selector: 'app-country-create',
-	templateUrl: './country-create.component.html',
-	styleUrls: ['./country-create.component.css']
-})
-export class CountryCreateComponent implements OnInit {
 
-	countryForm = new FormGroup({
+@Component({
+	selector: 'app-client-create',
+	templateUrl: './client-create.component.html',
+	styleUrls: ['./client-create.component.css']
+})
+export class ClientCreateComponent implements OnInit {
+
+	clientForm = new FormGroup({
+		id: new FormControl(''),
 		name: new FormControl('', [Validators.required]),
-		code: new FormControl('', [Validators.required]),
+		email: new FormControl('', [Validators.required]),
+		city: new FormControl(''),
+		description: new FormControl(''),
+		phone: new FormControl('', [Validators.required]),
+		phone2: new FormControl(''),
+		typeClientId: new FormControl('', [Validators.required]),
+		countryId: new FormControl('', [Validators.required]),
+		sectorId: new FormControl('', [Validators.required]),
 		state: new FormControl('', [Validators.required]),
 	});
 
+	data: any = {};
+  	tags: ClientTag[] = [];
+
 	constructor(
-		 private router: Router,
-		 private countryService: CountryService,
-     	 public dialog: MatDialog
+		private router: Router,
+		private clientService: ClientService,
+		public dialog: MatDialog
 		) { }
 
 	ngOnInit(): void {
+		this.getDataView();
+	}
+
+	getDataView(){
+		
+		this.clientService.getDataViewCreateAndEdit()
+		.subscribe( (response: any) => {
+			if(response){
+				this.data=response;
+			}
+		},error => {
+			console.log("Errror ");
+		});
 	}
 
 	onSubmit() {
-		if(this.countryForm.invalid) {
+		if(this.clientForm.invalid) {
 			return;
 		}else{
-			this.saveType();
+			this.save();
 		}
 	}
 
-	saveType(){
+	save(){
 		
-	     this.countryService.saveCountry(this.countryForm.value as any)
-	     .subscribe( (response: boolean) => {
-	          if(response){
-	            const dialogRef = this.dialog.open(ModalComponent,{width: '400px',
-	              data: {
-	                title: "El pais se agrego correctamente",
-	                message: "El registro se guardo satisfactoriamente"
-	              }
-	            });
-	            
-	            dialogRef.afterClosed().subscribe(() => this.router.navigate(['/country']));
+		var clientAdapter=this.clientForm.value as any;
+		clientAdapter.tags=this.tags;
+		clientAdapter.annotations=[];
 
-	          }
-	      },error => {
-	          console.log("Errror ");
-	      });
+		this.clientService.saveClient(<Client>clientAdapter)
+		.subscribe( (response: boolean) => {
+			if(response){
+				const dialogRef = this.dialog.open(ModalComponent,{width: '400px',
+					data: {
+						title: "El cliente se agrego correctamente",
+						message: "El registro se guardo satisfactoriamente"
+					}
+				});
+
+				dialogRef.afterClosed().subscribe(() => this.router.navigate(['/client']));
+
+			}
+		},error => {
+			console.log("Errror ");
+		});
 	}
 
-  get f() { return this.countryForm.controls; }
+	get f() { return this.clientForm.controls; }
 
 }

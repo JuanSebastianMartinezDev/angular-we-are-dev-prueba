@@ -1,54 +1,54 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,Validators } from '@angular/forms';
-import { CountryService } from '../../services/country.service';
-import { Country } from '../../../core/models/country.model';
+import { ClientService } from '../../services/client.service';
+import { Client } from '../../../core/models/client.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../../../modal/modal.component';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-	selector: 'app-country-edit',
-	templateUrl: './country-edit.component.html',
-	styleUrls: ['./country-edit.component.css']
+	selector: 'app-client-edit',
+	templateUrl: './client-edit.component.html',
+	styleUrls: ['./client-edit.component.css']
 })
-export class CountryEditComponent implements OnInit {
+export class ClientEditComponent implements OnInit {
 
-	countryForm = new FormGroup({
-		id: new FormControl("",),
+	clientForm = new FormGroup({
+		id: new FormControl("",[]),
 		name: new FormControl("", [Validators.required]),
-		code: new FormControl("", [Validators.required]),
+		email: new FormControl("", [Validators.required]),
 		state: new FormControl("", [Validators.required]),
 	});
 
-	country: Country = <Country>{};
+	client: Client = <Client>{};
 	id = "";
 
 	constructor(
 		private router: ActivatedRoute,
-		private countryService: CountryService,
+		private clientService: ClientService,
 		public dialog: MatDialog 
 		) { 
 		this.id = String(this.router.snapshot.paramMap.get('id'));
-		this.getCountry();
+		this.getClient();
 	}
 
 	ngOnInit(): void {
 	}
 
 	onSubmit() {
-		if(this.countryForm.invalid) {
+		if(this.clientForm.invalid) {
 			return;
 		}else{
 			this.updateType();
 		}
 	}
 
-	getCountry(){
+	getClient(){
 		
-		this.countryService.getCountryById(Number(this.id))
-		.subscribe( (country: Country) => {
-			if(country){
-				this.country=country;
+		this.clientService.getClientById(Number(this.id))
+		.subscribe( (client: Client) => {
+			if(client){
+				this.client=client;
 			}
 		},error => {
 			const dialogRef = this.dialog.open(ModalComponent,{width: '400px',
@@ -61,12 +61,12 @@ export class CountryEditComponent implements OnInit {
 
 	updateType(){
 		
-		this.countryService.updateCountry(this.countryForm.value as any)
+		this.clientService.updateClient(this.clientForm.value as any)
 		.subscribe( (response: boolean) => {
 			if(response){
 				const dialogRef = this.dialog.open(ModalComponent,{width: '400px',
 					data: {
-						title: "El pais se actualizo correctamente",
+						title: "El cliente se actualizo correctamente",
 						message: "La información se guardo satisfactoriamente"
 					}
 				});
@@ -80,5 +80,5 @@ export class CountryEditComponent implements OnInit {
 		});
 	}
 
-	get f() { return this.countryForm.controls; }
+	get f() { return this.clientForm.controls; }
 }

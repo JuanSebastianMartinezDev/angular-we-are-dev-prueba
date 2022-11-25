@@ -18,7 +18,7 @@
 									<div class="input-group">
 										<input type="text" placeholder="Introduce el nombre" class="form-control" value="" formControlName="name"  required>
 									</div>
-									<div *ngIf="f['state'].touched && f['name'].invalid" class="help-block with-errors text-danger">
+									<div *ngIf="f['name'].touched && f['name'].invalid" class="help-block with-errors text-danger">
 										<strong>Este campo es obligatorio</strong>
 									</div>
 								</div>

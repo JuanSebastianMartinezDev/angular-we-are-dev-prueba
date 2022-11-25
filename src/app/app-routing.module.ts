@@ -13,7 +13,11 @@ const routes: Routes = [
 	{
 		path: "country",
 		loadChildren: () => import("./country/country.module").then(m => m.CountryModule),
-	}	
+	},
+	{
+		path: "client",
+		loadChildren: () => import("./client/client.module").then(m => m.ClientModule),
+	}
 ];
 
 @NgModule({

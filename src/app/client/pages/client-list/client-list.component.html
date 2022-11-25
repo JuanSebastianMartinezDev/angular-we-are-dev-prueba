@@ -1,9 +1,9 @@
 <div class="container">
-	<app-breadcrum secondSection="Paises" threeSection="Listado" url="country"></app-breadcrum>
-	<h2 class="mb-3 mt-2 d-flex justify-content-between align-items-center">Modulo - Paises
+	<app-breadcrum secondSection="Clientes" threeSection="Listado" url="client"></app-breadcrum>
+	<h2 class="mb-3 mt-2 d-flex justify-content-between align-items-center">Modulo - clientes
 		<div class="float-right1">
 			<a class="btn btn-primary btn-sm " routerLink="/"><i class="fa fa-mail-reply"></i> < Atras</a>&nbsp;
-			<a class="btn btn-success btn-sm " routerLink="/country/create"><i class="fa fa-mail-reply"></i> + Nuevo</a>
+			<a class="btn btn-success btn-sm " routerLink="/client/create"><i class="fa fa-mail-reply"></i> + Nuevo</a>
 		</div>
 	</h2> 
 
@@ -12,7 +12,7 @@
 		<div class="col-md-12 ">
 			<div class="card ">
 				<div class="card-header text-white bg-primary " >
-					<h5 class="card-title mb-0">Listado de paises</h5>
+					<h5 class="card-title mb-0">Listado de clientes</h5>
 				</div>
 				<div class="card-body text-center">
 					<div class="col-12 table-responsive-lg">
@@ -21,7 +21,6 @@
 								<tr>
 									<th>ID</th>
 									<th>NOMBRE</th>
-									<th>CÓDIGO</th>
 									<th>FECHA CREACIÓN</th>
 									<th>FECHA ACTUALIZADO</th>
 									<th>ESTADO</th>
@@ -29,15 +28,14 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor='let country of countrys'>
-									<td>{{country.id}}</td>
-									<td>{{country.name}}</td>
-									<td>{{country.code}}</td>
-									<td>{{country.createdAt | date: "yyyy-M-dd HH:mm:ss a"}}</td>
-									<td>{{country.updatedAt | date: "yyyy-M-dd HH:mm:ss a"}}</td>
+								<tr *ngFor='let client of clients'>
+									<td>{{client.id}}</td>
+									<td>{{client.name}}</td>
+									<td>{{client.createdAt | date: "yyyy-M-dd HH:mm:ss a"}}</td>
+									<td>{{client.updatedAt | date: "yyyy-M-dd HH:mm:ss a"}}</td>
 									<td>
-										<button mat-button *ngIf="country.state==1" color="primary">Activo</button>
-										<button mat-button *ngIf="country.state==0" matBadgePosition="before" matBadgeColor="accent" color="warn">Inactivo</button>
+										<button mat-button *ngIf="client.state==1" color="primary">Activo</button>
+										<button mat-button *ngIf="client.state==0" matBadgePosition="before" matBadgeColor="accent" color="warn">Inactivo</button>
 									</td>
 									<td>
 
@@ -45,24 +43,24 @@
 											<mat-icon>more_vert</mat-icon>
 										</button>
 										<mat-menu #menu="matMenu">
-											<a routerLink="/country/{{country.id}}/edit">
+											<a routerLink="/client/{{client.id}}/edit">
 												<button mat-menu-item >
 													<mat-icon>edit</mat-icon>
 													<span>Editar</span>
 												</button>
 											</a>
-											<button mat-menu-item *ngIf="country.state==1" (click)="inactiveCountry(country)">
+											<button mat-menu-item *ngIf="client.state==1" (click)="inactiveClient(client)">
 												<mat-icon>delete</mat-icon>
 												<span>Inactivar</span>
 											</button>
-											<button mat-menu-item *ngIf="country.state==0" (click)="restoreCountry(country)">
+											<button mat-menu-item *ngIf="client.state==0" (click)="restoreClient(client)">
 												<mat-icon>check_circle_outline</mat-icon>
 												<span>Activar</span>
 											</button>
 										</mat-menu>
 									</td>
 								</tr>
-								<tr *ngIf="!countrys.length" >
+								<tr *ngIf="!clients.length" >
 									<th colspan="6">No hay registros para mostrar</th>
 								</tr>					    
 							</tbody>
