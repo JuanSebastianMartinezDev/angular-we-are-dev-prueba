@@ -61,7 +61,25 @@ export class ClientService {
   }
 
   updateClient(client : Client): Observable<boolean> {
-    return this.http.put(this.url+'/'+client.id,client).pipe(
+
+    var newCLient= {
+      Name: client.name, 
+      City: client.city,
+      CountryId: client.countryId,
+      Description: client.description,
+      Direction: client.direction,
+      Email: client.email,
+      Phone: client.phone,
+      Phone2: (client.phone2)? client.phone2: null,
+      SectorId: client.sectorId,
+      State: client.state,
+      TypeClientId: client.typeClientId,
+      UrlImage: client.urlImage,
+      Tags:[],
+      Annotations: [],
+    };
+        
+    return this.http.put(this.url+'/'+client.id,newCLient).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
 

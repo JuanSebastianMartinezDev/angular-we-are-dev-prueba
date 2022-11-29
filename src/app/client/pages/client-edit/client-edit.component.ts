@@ -14,14 +14,26 @@ import { ActivatedRoute } from '@angular/router';
 export class ClientEditComponent implements OnInit {
 
 	clientForm = new FormGroup({
-		id: new FormControl("",[]),
-		name: new FormControl("", [Validators.required]),
-		email: new FormControl("", [Validators.required]),
-		state: new FormControl("", [Validators.required]),
+		id: new FormControl(""),
+		name: new FormControl('', [Validators.required]),
+		email: new FormControl('', [Validators.required]),
+		city: new FormControl(''),
+		description: new FormControl(''),
+		urlImage: new FormControl(''),
+		createdAt: new FormControl(''),
+		updatedAt: new FormControl(''),
+		direction: new FormControl(''),
+		phone: new FormControl('', [Validators.required]),
+		phone2: new FormControl(''),
+		typeClientId: new FormControl('', [Validators.required]),
+		countryId: new FormControl('', [Validators.required]),
+		sectorId: new FormControl('', [Validators.required]),
+		state: new FormControl('', [Validators.required]),
 	});
 
 	client: Client = <Client>{};
 	id = "";
+	data: any = {};
 
 	constructor(
 		private router: ActivatedRoute,
@@ -33,6 +45,7 @@ export class ClientEditComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.getDataView();
 	}
 
 	onSubmit() {
@@ -43,6 +56,18 @@ export class ClientEditComponent implements OnInit {
 		}
 	}
 
+	getDataView(){
+		
+		this.clientService.getDataViewCreateAndEdit()
+		.subscribe( (response: any) => {
+			if(response){
+				this.data=response;
+			}
+		},error => {
+			console.log("Errror ");
+		});
+	}
+	
 	getClient(){
 		
 		this.clientService.getClientById(Number(this.id))

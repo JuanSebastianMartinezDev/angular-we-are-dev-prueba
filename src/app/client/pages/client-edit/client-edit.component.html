@@ -1,6 +1,6 @@
 <div class="container">
 	<app-breadcrum secondSection="Clientes" threeSection="Edición" url="client"></app-breadcrum>	
-	<h2 class="mb-3 mt-2 d-flex justify-content-between align-items-center">Editar pais
+	<h2 class="mb-3 mt-2 d-flex justify-content-between align-items-center">Editar cliente
 		<a class="btn btn-primary btn-sm float-right" routerLink="/client"><i class="fa fa-mail-reply"></i> < Atras</a>
 	</h2> 
 
@@ -13,28 +13,35 @@
 						<h2 class="text-muted">Ingresa los datos basicos</h2>
 						<form [formGroup]="clientForm"  (ngSubmit)="onSubmit()">
 							<input type="hidden" name="id" formControlName="id" [ngModel]="client.id">
-							<div class="col-12 ">
+
+							<div class="col-12">
 								<div class="form-group mb-4">
 									<label for="name">Nombre <span class="text-danger">(*)</span></label>
 									<div class="input-group">
 										<input type="text" placeholder="Introduce el nombre" class="form-control" value="" formControlName="name" [ngModel]="client.name" required>
 									</div>
-									<div *ngIf="f['name'].touched && f['name'].invalid" class="help-block with-errors text-danger" >
+									<div *ngIf="f['name'].touched && f['name'].invalid" class="help-block with-errors text-danger">
 										<strong>Este campo es obligatorio</strong>
 									</div>
 								</div>
 								<div class="form-group mb-4">
 									<label for="email">Email <span class="text-danger">(*)</span></label>
 									<div class="input-group">
-										<input type="email" placeholder="Introduce el email" class="form-control" value="" formControlName="email" [ngModel]="client.email" required>
+										<input type="email" placeholder="Introduce el email" class="form-control" value="" formControlName="email" [ngModel]="client.email"  required>
 									</div>
-									<div *ngIf="f['email'].touched && f['email'].invalid" class="help-block with-errors text-danger" >
+									<div *ngIf="f['email'].touched && f['email'].invalid" class="help-block with-errors text-danger">
 										<strong>Este campo es obligatorio</strong>
+									</div>
+								</div>									
+								<div class="form-group mb-4">
+									<label for="description">Descripción </label>
+									<div class="input-group">
+										<textarea placeholder="Introduce una descripción" class="form-control col-12" rows="3" value="" formControlName="description" [ngModel]="client.description"  ></textarea>
 									</div>
 								</div>								
 								<div class="form-group mb-4">
-									<label for="state">Estado <span class="text-danger">(*)</span></label>
-									<select class="form-control"  [ngModel]="client.state" formControlName="state" required>
+									<label for="name">Estado <span class="text-danger">(*)</span></label>
+									<select class="form-control" formControlName="state" [ngModel]="client.state" required>
 										<option value="">Seleccione el estado</option>
 										<option value="1" >Activo</option>
 										<option value="0" >Inactivo</option>
@@ -43,10 +50,85 @@
 										<strong>Este campo es obligatorio</strong>
 									</div>
 								</div>
+
+								<div class="form-group mb-4">
+									<label for="name">Tipo de cliente <span class="text-danger">(*)</span></label>
+									<select class="form-control" formControlName="typeClientId" [ngModel]="client.typeClientId" required>
+										<option value="">Seleccione el tipo</option>
+										<option *ngFor="let type of data.types" 
+										    [value]="type.id">
+										  {{type.name}}
+										</option>
+									</select>
+									<div *ngIf="f['typeClientId'].touched && f['typeClientId'].invalid" class="help-block with-errors text-danger">
+										<strong>Este campo es obligatorio</strong>
+									</div>
+								</div>	
+
+								<div class="form-group mb-4">
+									<label for="name">Sector <span class="text-danger">(*)</span></label>
+									<select class="form-control" formControlName="sectorId" [ngModel]="client.sectorId" required>
+										<option value="">Seleccione el sector</option>
+										<option *ngFor="let sector of data.sectors" 
+										    [value]="sector.id">
+										  {{sector.name}}
+										</option>
+									</select>
+									<div *ngIf="f['sectorId'].touched && f['sectorId'].invalid" class="help-block with-errors text-danger">
+										<strong>Este campo es obligatorio</strong>
+									</div>
+								</div>	
+
+								<div class="row">
+																	
+									<div class="form-group mb-4 col-sm-12 col-lg-6 col-md-6">
+										<label for="name">Pais <span class="text-danger">(*)</span></label>
+										<select class="form-control" formControlName="countryId" [ngModel]="client.countryId" required>
+											<option value="">Seleccione el pais</option>
+											<option *ngFor="let country of data.countrys" 
+											    [value]="country.id">
+											  {{country.name}}
+											</option>
+										</select>
+										<div *ngIf="f['countryId'].touched && f['countryId'].invalid" class="help-block with-errors text-danger">
+											<strong>Este campo es obligatorio</strong>
+										</div>
+									</div>	
+
+									<div class="form-group mb-4 col-sm-12 col-lg-6 col-md-6">
+										<label for="city">Ciudad </label>
+										<div class="input-group">
+											<input type="text" placeholder="Introduce el nombre de la ciudad" class="form-control" value="" formControlName="city" [ngModel]="client.city" >
+										</div>
+									</div>
+
+								</div>
+
+								<div class="row">									
+									<div class="form-group mb-4 col-sm-12 col-lg-6 col-md-6">
+										<label for="phone">N. de contacto <span class="text-danger">(*)</span></label>
+										<div class="input-group">
+											<input type="number" placeholder="Introduce un número" class="form-control" value="" formControlName="phone" [ngModel]="client.phone" required>
+										</div>
+										<div *ngIf="f['phone'].touched && f['phone'].invalid" class="help-block with-errors text-danger">
+											<strong>Este campo es obligatorio</strong>
+										</div>
+									</div>
+
+									<div class="form-group mb-4 col-sm-12 col-lg-6 col-md-6">
+										<label for="phone2">N. de contacto 2 </label>
+										<div class="input-group">
+											<input type="number" placeholder="Introduce un número" class="form-control" value="" formControlName="phone2" [ngModel]="client.phone2" >
+										</div>
+									</div>
+
+								</div>
+
 								<div class="col-12">
-									<button type="submit" [disabled]="!clientForm.valid" class="btn btn-success">Editar</button>
+									<button type="submit" [disabled]="!clientForm.valid" class="btn btn-success">Guardar</button>
 								</div>
 							</div>
+
 
 						</form>
 
