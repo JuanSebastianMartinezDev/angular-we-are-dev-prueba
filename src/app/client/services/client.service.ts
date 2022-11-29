@@ -95,11 +95,7 @@ export class ClientService {
     return of();
   }
 
-  saveClient(client : Client, clientTags : ClientTag[]): Observable<boolean> {
-    console.log('Into save client');
-    console.log(client);
-    console.log('This tags');
-    console.log(clientTags);
+  saveClient(client : Client): Observable<boolean> {
 
     var newCLient= {
       Name: client.name, 
@@ -109,17 +105,17 @@ export class ClientService {
       Direction: client.direction,
       Email: client.email,
       Phone: client.phone,
-      Phone2: client.phone2,
+      Phone2: (client.phone2)? client.phone2: null,
       SectorId: client.sectorId,
       State: client.state,
       TypeClientId: client.typeClientId,
       UrlImage: client.urlImage,
-      Tags: [],
+      Tags:[],
       Annotations: [],
     };
 
 
-    return this.http.post(this.url,newCLient).pipe(
+    return this.http.post(this.url,newCLient,{headers: this.headers }).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
         console.log('This data');

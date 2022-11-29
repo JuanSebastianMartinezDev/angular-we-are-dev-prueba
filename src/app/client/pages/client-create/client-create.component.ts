@@ -69,11 +69,7 @@ export class ClientCreateComponent implements OnInit {
 
 	save(){
 		Object.assign(this.client, this.clientForm.value);
-		console.log("client to send");
-		console.log(this.client);
-		// this.client.tags=this.tags;
-		// this.client.annotations=this.annotations;
-		this.clientService.saveClient(this.client,this.tags)
+		this.clientService.saveClient(this.client)
 		.subscribe( (response: boolean) => {
 			if(response){
 				const dialogRef = this.dialog.open(ModalComponent,{width: '400px',

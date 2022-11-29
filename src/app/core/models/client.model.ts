@@ -12,7 +12,7 @@ export class Client {
     public urlImage: string,
     public state: number,
     public phone: number,
-    public phone2: number,
+    public phone2: number | null,
     public city: string,
     public direction: string | null,
     public typeClientId: number,
