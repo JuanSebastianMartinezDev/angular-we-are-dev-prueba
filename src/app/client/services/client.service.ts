@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Client, ClientAdapter } from '../../core/models/client.model';
+import { ClientTag } from '../../core/models/client-tag.model';
 import { TypeClient, TypeClientAdapter } from '../../core/models/type-client.model';
 import { Sector, SectorAdapter } from '../../core/models/sector.model';
 import { Country, CountryAdapter } from '../../core/models/country.model';
@@ -63,6 +64,7 @@ export class ClientService {
     return this.http.put(this.url+'/'+client.id,client).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
+
         return data;
       })
     );
@@ -85,6 +87,7 @@ export class ClientService {
     return this.http.post(this.url+'/restore/'+id,{}).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
+        console.log();
         return data;
       })
     );
@@ -92,10 +95,35 @@ export class ClientService {
     return of();
   }
 
-  saveClient(client : Client): Observable<boolean> {
-    return this.http.post(this.url,client).pipe(
+  saveClient(client : Client, clientTags : ClientTag[]): Observable<boolean> {
+    console.log('Into save client');
+    console.log(client);
+    console.log('This tags');
+    console.log(clientTags);
+
+    var newCLient= {
+      Name: client.name, 
+      City: client.city,
+      CountryId: client.countryId,
+      Description: client.description,
+      Direction: client.direction,
+      Email: client.email,
+      Phone: client.phone,
+      Phone2: client.phone2,
+      SectorId: client.sectorId,
+      State: client.state,
+      TypeClientId: client.typeClientId,
+      UrlImage: client.urlImage,
+      Tags: [],
+      Annotations: [],
+    };
+
+
+    return this.http.post(this.url,newCLient).pipe(
       // Adapt with each cycle
       map((data: any) =>  {
+        console.log('This data');
+        console.log(data);
         return data;
       })
     );

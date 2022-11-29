@@ -8,20 +8,21 @@ export class Client {
     public id: number,
     public name: string,
     public email: string,
-    public urlImage: string,
     public description: string,
-    public phone: string,
-    public phone2: string,
-    public typeClientId: string,
-    public countryId: string,
-    public sectorId: string,
+    public urlImage: string,
     public state: number,
+    public phone: number,
+    public phone2: number,
+    public city: string,
+    public direction: string | null,
+    public typeClientId: number,
+    public countryId: number,
+    public sectorId: number,
     public createdAt: string,
     public updatedAt: string,
-    public annotations: ClientAnnotation[] = [],
-    public tags: ClientTag[] = []
     ){}
 }
+
 
 @Injectable({
   providedIn: "root",
@@ -32,18 +33,18 @@ export class ClientAdapter implements Adapter<Client> {
       item.id,
       item.name,
       item.email,
-      item.urlImage,
       item.description,
+      item.urlImage,
+      item.state,
       item.phone,
       item.phone2,
+      item.city,
+      item.direction,
       item.typeClientId,
       item.countryId,
       item.sectorId,
-      item.state,
       item.createdAt,
-      item.updatedAt,
-      item.annotations,
-      item.tags,
+      item.updatedAt
     );
   }
 }
